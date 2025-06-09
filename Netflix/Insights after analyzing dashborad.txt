@@ -1,0 +1,10 @@
+1. No relation between top countries producing highest number of movies vs top countries having highest average IMDB ratings
+   basically, this leads to a conclusion that "quantity doesn't mean quality"
+
+2. "Medium Length duration" movies(90mins-150mins) are produced the most and are the second highest rated duration
+
+3. "Documentaries" is the second highest rated genre and the fourth most produced genre
+
+In conclusion we can safely say that a movie which is of "medium length duration" i.e., 90mins-150mins and has genre "Documentaries"
+has the highest chance of becoming a "superhit"
+Also producing more movies will not lead to more "hit" movies.

@@ -1,0 +1,59 @@
+SQL Questions:
+ 1. Retrieve all successful bookings:
+ 2. Find the average ride distance for each vehicle type:
+ 3. Get the total number of cancelled rides by customers:
+ 4. List the top 5 customers who booked the highest number of rides:
+ 5. Get the number of rides cancelled by drivers due to personal and car-related issues:
+ 6. Find the maximum and minimum driver ratings for Prime Sedan bookings:
+ 7. Retrieve all rides where payment was made using UPI:
+ 8. Find the average customer rating per vehicle type:
+ 9. Calculate the total booking value of rides completed successfully:
+ 10. List all incomplete rides along with the reason:
+
+Solutions
+
+1.
+SELECT * FROM ola
+WHERE booking_status = 'Success'
+
+2.
+SELECT vehicle_type, AVG(ride_distance) AS "Average_ride_distance" FROM ola
+GROUP BY vehicle_type
+
+3.
+SELECT booking_status, COUNT(booking_id) AS "No. of cancelled rides by customers" FROM ola
+GROUP BY booking_status
+HAVING booking_status = 'Cancelled by Customer'
+
+4.
+SELECT customer_id, COUNT(booking_id) AS "rides_booked" FROM ola
+GROUP BY customer_id
+ORDER BY COUNT(booking_id) DESC
+LIMIT 5
+
+5.
+SELECT cancellation_reason_driver, SUM(cancelled_rides_driver) AS "no. of rides cancelled by drivers" FROM ola
+GROUP BY cancellation_reason_driver
+HAVING cancellation_reason_driver = 'Personal & Car related issues'
+
+6.
+SELECT vehicle_type, MAX(ROUND(driver_ratings,2)) AS "min_driver_rating", MIN(ROUND(driver_ratings,2)) AS "max_driver_rating" FROM ola
+GROUP BY vehicle_type
+HAVING vehicle_type = 'Prime Sedan'
+
+7.
+SELECT * FROM ola
+WHERE payment_method = 'UPI'
+
+8.
+SELECT vehicle_type, AVG(customer_ratings) AS "average_customer_rating" FROM ola
+GROUP BY vehicle_type
+
+9.
+SELECT booking_status, SUM(booking_value) AS "Total_Booking_Value" FROM ola
+GROUP BY booking_status
+HAVING booking_status = 'Success'
+
+10.
+SELECT booking_status, incomplete_rides_reason FROM ola
+WHERE booking_status = 'Incomplete'
